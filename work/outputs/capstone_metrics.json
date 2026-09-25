@@ -1,0 +1,873 @@
+{
+  "project": "FlyRank Machine Learning Week-8 Capstone",
+  "lane": "Content Refresh Priority Prediction",
+  "random_state": 42,
+  "w04_baseline_definition": {
+    "formula": "score = 2*(impressions >= 1000) + 2*(staleness_days >= 14) + 1*(position >= 8)",
+    "score_range": [
+      0,
+      5
+    ],
+    "binary_threshold": "score >= 3",
+    "reason_codes": {
+      "STALE_HIGH_VOLUME": "impressions >= 1000 and staleness_days >= 14",
+      "REVIEW": "otherwise"
+    },
+    "actions": {
+      "REVIEW_NOW": "score >= 4",
+      "PRIORITIZE": "score == 3",
+      "MONITOR": "score < 3"
+    }
+  },
+  "w05_practice_evaluation": {
+    "dataset": "w05_ml_practice_dataset.csv",
+    "n_total": 100,
+    "n_train": 80,
+    "n_test": 20,
+    "split_design": "Stratified Random Split (80/20, random_state=42)",
+    "positive_base_rate_total": 0.61,
+    "positive_base_rate_test": 0.6,
+    "features": [
+      "impressions",
+      "clicks",
+      "staleness_days",
+      "position"
+    ],
+    "week4_baseline": {
+      "accuracy": 0.7,
+      "f1": 0.7857,
+      "precision": 0.6875,
+      "recall": 0.9167,
+      "roc_auc": 0.8542,
+      "average_precision": 0.8851,
+      "precision_at_10": 0.9,
+      "precision_at_20": 0.6,
+      "precision_at_50": 0.6,
+      "tp": 11,
+      "fp": 5,
+      "tn": 3,
+      "fn": 1
+    },
+    "week5_logistic_regression": {
+      "accuracy": 0.8,
+      "f1": 0.8571,
+      "precision": 0.75,
+      "recall": 1.0,
+      "roc_auc": 0.9375,
+      "average_precision": 0.9511,
+      "precision_at_10": 0.9,
+      "precision_at_20": 0.6,
+      "precision_at_50": 0.6,
+      "tp": 12,
+      "fp": 4,
+      "tn": 4,
+      "fn": 0
+    },
+    "intercept": 0.524358,
+    "coefficients": [
+      {
+        "feature": "staleness_days",
+        "coefficient": 0.640502,
+        "absolute_coefficient": 0.640502
+      },
+      {
+        "feature": "impressions",
+        "coefficient": 0.432939,
+        "absolute_coefficient": 0.432939
+      },
+      {
+        "feature": "clicks",
+        "coefficient": 0.113056,
+        "absolute_coefficient": 0.113056
+      },
+      {
+        "feature": "position",
+        "coefficient": 0.10473,
+        "absolute_coefficient": 0.10473
+      }
+    ],
+    "test_errors": [
+      {
+        "impressions": 904,
+        "clicks": 740,
+        "staleness_days": 22,
+        "position": 2,
+        "test_pos": 5,
+        "item_id": "item_100",
+        "actual": 0,
+        "predicted": 1,
+        "pred_prob": 0.5336,
+        "baseline_score": 2,
+        "baseline_pred": 0
+      },
+      {
+        "impressions": 1095,
+        "clicks": 460,
+        "staleness_days": 24,
+        "position": 2,
+        "test_pos": 9,
+        "item_id": "item_067",
+        "actual": 0,
+        "predicted": 1,
+        "pred_prob": 0.5379,
+        "baseline_score": 4,
+        "baseline_pred": 1
+      },
+      {
+        "impressions": 479,
+        "clicks": 476,
+        "staleness_days": 25,
+        "position": 10,
+        "test_pos": 10,
+        "item_id": "item_079",
+        "actual": 0,
+        "predicted": 1,
+        "pred_prob": 0.5557,
+        "baseline_score": 3,
+        "baseline_pred": 1
+      },
+      {
+        "impressions": 4898,
+        "clicks": 749,
+        "staleness_days": 19,
+        "position": 7,
+        "test_pos": 12,
+        "item_id": "item_063",
+        "actual": 0,
+        "predicted": 1,
+        "pred_prob": 0.7891,
+        "baseline_score": 4,
+        "baseline_pred": 1
+      }
+    ]
+  },
+  "w04_top10_queue": [
+    {
+      "rank": 1,
+      "item_id": "item_002",
+      "impressions": 3892,
+      "clicks": 117,
+      "position": 11,
+      "staleness_days": 25,
+      "ctr": 0.0301,
+      "score": 5,
+      "action": "REVIEW_NOW",
+      "reason_code": "STALE_HIGH_VOLUME",
+      "confidence": "High (all 3 baseline thresholds met)",
+      "what_could_make_it_wrong": "Search demand may be seasonal or split across a sibling page; verify query trend before editing."
+    },
+    {
+      "rank": 2,
+      "item_id": "item_011",
+      "impressions": 2679,
+      "clicks": 86,
+      "position": 12,
+      "staleness_days": 25,
+      "ctr": 0.0321,
+      "score": 5,
+      "action": "REVIEW_NOW",
+      "reason_code": "STALE_HIGH_VOLUME",
+      "confidence": "High (all 3 baseline thresholds met)",
+      "what_could_make_it_wrong": "Search demand may be seasonal or split across a sibling page; verify query trend before editing."
+    },
+    {
+      "rank": 3,
+      "item_id": "item_015",
+      "impressions": 3615,
+      "clicks": 38,
+      "position": 10,
+      "staleness_days": 24,
+      "ctr": 0.0105,
+      "score": 5,
+      "action": "REVIEW_NOW",
+      "reason_code": "STALE_HIGH_VOLUME",
+      "confidence": "High (all 3 baseline thresholds met)",
+      "what_could_make_it_wrong": "Search demand may be seasonal or split across a sibling page; verify query trend before editing."
+    },
+    {
+      "rank": 4,
+      "item_id": "item_019",
+      "impressions": 4214,
+      "clicks": 340,
+      "position": 8,
+      "staleness_days": 15,
+      "ctr": 0.0807,
+      "score": 5,
+      "action": "REVIEW_NOW",
+      "reason_code": "STALE_HIGH_VOLUME",
+      "confidence": "High (all 3 baseline thresholds met)",
+      "what_could_make_it_wrong": "Search demand may be seasonal or split across a sibling page; verify query trend before editing."
+    },
+    {
+      "rank": 5,
+      "item_id": "item_020",
+      "impressions": 2306,
+      "clicks": 390,
+      "position": 10,
+      "staleness_days": 22,
+      "ctr": 0.1691,
+      "score": 5,
+      "action": "REVIEW_NOW",
+      "reason_code": "STALE_HIGH_VOLUME",
+      "confidence": "High (all 3 baseline thresholds met)",
+      "what_could_make_it_wrong": "Strong observed CTR (>=12%); high click capture despite age/position may mean content still satisfies intent."
+    },
+    {
+      "rank": 6,
+      "item_id": "item_024",
+      "impressions": 4641,
+      "clicks": 236,
+      "position": 12,
+      "staleness_days": 14,
+      "ctr": 0.0509,
+      "score": 5,
+      "action": "REVIEW_NOW",
+      "reason_code": "STALE_HIGH_VOLUME",
+      "confidence": "High (all 3 baseline thresholds met)",
+      "what_could_make_it_wrong": "Search demand may be seasonal or split across a sibling page; verify query trend before editing."
+    },
+    {
+      "rank": 7,
+      "item_id": "item_025",
+      "impressions": 3929,
+      "clicks": 251,
+      "position": 9,
+      "staleness_days": 16,
+      "ctr": 0.0639,
+      "score": 5,
+      "action": "REVIEW_NOW",
+      "reason_code": "STALE_HIGH_VOLUME",
+      "confidence": "High (all 3 baseline thresholds met)",
+      "what_could_make_it_wrong": "Search demand may be seasonal or split across a sibling page; verify query trend before editing."
+    },
+    {
+      "rank": 8,
+      "item_id": "item_026",
+      "impressions": 3254,
+      "clicks": 26,
+      "position": 10,
+      "staleness_days": 18,
+      "ctr": 0.008,
+      "score": 5,
+      "action": "REVIEW_NOW",
+      "reason_code": "STALE_HIGH_VOLUME",
+      "confidence": "High (all 3 baseline thresholds met)",
+      "what_could_make_it_wrong": "Search demand may be seasonal or split across a sibling page; verify query trend before editing."
+    },
+    {
+      "rank": 9,
+      "item_id": "item_003",
+      "impressions": 3307,
+      "clicks": 50,
+      "position": 6,
+      "staleness_days": 26,
+      "ctr": 0.0151,
+      "score": 4,
+      "action": "REVIEW_NOW",
+      "reason_code": "STALE_HIGH_VOLUME",
+      "confidence": "Medium-High (2 primary thresholds met)",
+      "what_could_make_it_wrong": "Already ranks on page 1 (pos <=7); low CTR may call for title/snippet refinement rather than full rewrite."
+    },
+    {
+      "rank": 10,
+      "item_id": "item_005",
+      "impressions": 2221,
+      "clicks": 444,
+      "position": 6,
+      "staleness_days": 27,
+      "ctr": 0.1999,
+      "score": 4,
+      "action": "REVIEW_NOW",
+      "reason_code": "STALE_HIGH_VOLUME",
+      "confidence": "Medium-High (2 primary thresholds met)",
+      "what_could_make_it_wrong": "Strong observed CTR (>=12%); high click capture despite age/position may mean content still satisfies intent."
+    }
+  ],
+  "flyrank_30k_evaluation": {
+    "dataset": "data/raw/content_refresh_anonymized.csv",
+    "n_total": 30000,
+    "n_clients": 32,
+    "positive_base_rate_total": 0.5421,
+    "valid_position_median_imputed": 11.4,
+    "splits": {
+      "stratified_random_split": {
+        "train_rows": 24000,
+        "test_rows": 6000,
+        "train_positive_rate": 0.5421,
+        "test_positive_rate": 0.542,
+        "w04_rule_baseline": {
+          "accuracy": 0.5432,
+          "f1": 0.6557,
+          "precision": 0.5543,
+          "recall": 0.8026,
+          "roc_auc": 0.553,
+          "average_precision": 0.578,
+          "precision_at_10": 0.6,
+          "precision_at_20": 0.7,
+          "precision_at_50": 0.74,
+          "tp": 2610,
+          "fp": 2099,
+          "tn": 649,
+          "fn": 642
+        },
+        "starter_ref_baseline": {
+          "accuracy": 0.5372,
+          "f1": 0.5166,
+          "precision": 0.5953,
+          "recall": 0.4563,
+          "roc_auc": 0.5787,
+          "average_precision": 0.5699,
+          "precision_at_10": 0.3,
+          "precision_at_20": 0.4,
+          "precision_at_50": 0.48,
+          "tp": 1484,
+          "fp": 1009,
+          "tn": 1739,
+          "fn": 1768
+        },
+        "logreg_4feat_raw": {
+          "accuracy": 0.5498,
+          "f1": 0.6685,
+          "precision": 0.5563,
+          "recall": 0.8376,
+          "roc_auc": 0.5557,
+          "average_precision": 0.5922,
+          "precision_at_10": 0.5,
+          "precision_at_20": 0.35,
+          "precision_at_50": 0.46,
+          "tp": 2724,
+          "fp": 2173,
+          "tn": 575,
+          "fn": 528,
+          "coefficients": [
+            {
+              "feature": "staleness_days",
+              "coefficient": 0.189725,
+              "absolute_coefficient": 0.189725
+            },
+            {
+              "feature": "clicks",
+              "coefficient": -0.158847,
+              "absolute_coefficient": 0.158847
+            },
+            {
+              "feature": "position",
+              "coefficient": -0.157167,
+              "absolute_coefficient": 0.157167
+            },
+            {
+              "feature": "impressions",
+              "coefficient": 0.018422,
+              "absolute_coefficient": 0.018422
+            }
+          ]
+        },
+        "logreg_7feat_predecision": {
+          "accuracy": 0.6358,
+          "f1": 0.6575,
+          "precision": 0.6706,
+          "recall": 0.6448,
+          "roc_auc": 0.69,
+          "average_precision": 0.7079,
+          "precision_at_10": 0.8,
+          "precision_at_20": 0.9,
+          "precision_at_50": 0.9,
+          "tp": 2097,
+          "fp": 1030,
+          "tn": 1718,
+          "fn": 1155,
+          "coefficients": [
+            {
+              "feature": "log_impressions",
+              "coefficient": 1.072559,
+              "absolute_coefficient": 1.072559
+            },
+            {
+              "feature": "log_clicks",
+              "coefficient": -0.90073,
+              "absolute_coefficient": 0.90073
+            },
+            {
+              "feature": "content_age_days",
+              "coefficient": -0.405229,
+              "absolute_coefficient": 0.405229
+            },
+            {
+              "feature": "position",
+              "coefficient": -0.282324,
+              "absolute_coefficient": 0.282324
+            },
+            {
+              "feature": "staleness_days",
+              "coefficient": 0.110699,
+              "absolute_coefficient": 0.110699
+            },
+            {
+              "feature": "days_with_impressions",
+              "coefficient": -0.01665,
+              "absolute_coefficient": 0.01665
+            },
+            {
+              "feature": "ctr_pct",
+              "coefficient": 0.008241,
+              "absolute_coefficient": 0.008241
+            }
+          ]
+        }
+      },
+      "client_grouped_holdout": {
+        "train_rows": 27675,
+        "test_rows": 2325,
+        "train_positive_rate": 0.5548,
+        "test_positive_rate": 0.391,
+        "w04_rule_baseline": {
+          "accuracy": 0.4817,
+          "f1": 0.4356,
+          "precision": 0.3793,
+          "recall": 0.5116,
+          "roc_auc": 0.4821,
+          "average_precision": 0.4015,
+          "precision_at_10": 0.5,
+          "precision_at_20": 0.4,
+          "precision_at_50": 0.5,
+          "tp": 465,
+          "fp": 761,
+          "tn": 655,
+          "fn": 444
+        },
+        "starter_ref_baseline": {
+          "accuracy": 0.6086,
+          "f1": 0.2743,
+          "precision": 0.4986,
+          "recall": 0.1892,
+          "roc_auc": 0.6269,
+          "average_precision": 0.4676,
+          "precision_at_10": 0.2,
+          "precision_at_20": 0.15,
+          "precision_at_50": 0.24,
+          "tp": 172,
+          "fp": 173,
+          "tn": 1243,
+          "fn": 737
+        },
+        "logreg_4feat_raw": {
+          "accuracy": 0.3897,
+          "f1": 0.5256,
+          "precision": 0.3775,
+          "recall": 0.8647,
+          "roc_auc": 0.4191,
+          "average_precision": 0.3351,
+          "precision_at_10": 0.3,
+          "precision_at_20": 0.3,
+          "precision_at_50": 0.28,
+          "tp": 786,
+          "fp": 1296,
+          "tn": 120,
+          "fn": 123,
+          "coefficients": [
+            {
+              "feature": "position",
+              "coefficient": -0.196085,
+              "absolute_coefficient": 0.196085
+            },
+            {
+              "feature": "clicks",
+              "coefficient": -0.184039,
+              "absolute_coefficient": 0.184039
+            },
+            {
+              "feature": "staleness_days",
+              "coefficient": 0.179812,
+              "absolute_coefficient": 0.179812
+            },
+            {
+              "feature": "impressions",
+              "coefficient": 0.028048,
+              "absolute_coefficient": 0.028048
+            }
+          ]
+        },
+        "logreg_7feat_predecision": {
+          "accuracy": 0.6688,
+          "f1": 0.5595,
+          "precision": 0.5828,
+          "recall": 0.538,
+          "roc_auc": 0.7144,
+          "average_precision": 0.5583,
+          "precision_at_10": 0.7,
+          "precision_at_20": 0.7,
+          "precision_at_50": 0.62,
+          "tp": 489,
+          "fp": 350,
+          "tn": 1066,
+          "fn": 420,
+          "coefficients": [
+            {
+              "feature": "log_impressions",
+              "coefficient": 1.236082,
+              "absolute_coefficient": 1.236082
+            },
+            {
+              "feature": "log_clicks",
+              "coefficient": -0.957725,
+              "absolute_coefficient": 0.957725
+            },
+            {
+              "feature": "content_age_days",
+              "coefficient": -0.399013,
+              "absolute_coefficient": 0.399013
+            },
+            {
+              "feature": "position",
+              "coefficient": -0.293176,
+              "absolute_coefficient": 0.293176
+            },
+            {
+              "feature": "days_with_impressions",
+              "coefficient": -0.210529,
+              "absolute_coefficient": 0.210529
+            },
+            {
+              "feature": "staleness_days",
+              "coefficient": 0.102167,
+              "absolute_coefficient": 0.102167
+            },
+            {
+              "feature": "ctr_pct",
+              "coefficient": 0.006194,
+              "absolute_coefficient": 0.006194
+            }
+          ]
+        }
+      }
+    },
+    "error_analysis_client_holdout": {
+      "false_positives_top3": [
+        {
+          "content_id": "content_3e79eaafc89d",
+          "client_id": "client_f74efabef1",
+          "impressions": 8779,
+          "clicks": 0,
+          "staleness_days": 20,
+          "position": 11.6,
+          "ctr_pct": 0.0,
+          "days_with_impressions": 88,
+          "content_age_days": 123,
+          "trend_direction": "stable",
+          "actual": 0,
+          "predicted": 1,
+          "pred_prob": 0.9159253925040739,
+          "score": 5
+        },
+        {
+          "content_id": "content_8fdbff16a886",
+          "client_id": "client_f74efabef1",
+          "impressions": 3863,
+          "clicks": 0,
+          "staleness_days": 20,
+          "position": 12.0,
+          "ctr_pct": 0.0,
+          "days_with_impressions": 24,
+          "content_age_days": 175,
+          "trend_direction": "new",
+          "actual": 0,
+          "predicted": 1,
+          "pred_prob": 0.9059852868951639,
+          "score": 5
+        },
+        {
+          "content_id": "content_25ebfb5aa399",
+          "client_id": "client_f74efabef1",
+          "impressions": 4984,
+          "clicks": 0,
+          "staleness_days": 20,
+          "position": 14.4,
+          "ctr_pct": 0.0,
+          "days_with_impressions": 88,
+          "content_age_days": 125,
+          "trend_direction": "stable",
+          "actual": 0,
+          "predicted": 1,
+          "pred_prob": 0.8867775986302734,
+          "score": 5
+        }
+      ],
+      "false_negatives_top3": [
+        {
+          "content_id": "content_86748254b6bf",
+          "client_id": "client_d4735e3a26",
+          "impressions": 1,
+          "clicks": 0,
+          "staleness_days": 20,
+          "position": 90.0,
+          "ctr_pct": 0.0,
+          "days_with_impressions": 1,
+          "content_age_days": 495,
+          "trend_direction": "down",
+          "actual": 1,
+          "predicted": 0,
+          "pred_prob": 0.02525917859650963,
+          "score": 3
+        },
+        {
+          "content_id": "content_50daa4cd4375",
+          "client_id": "client_d4735e3a26",
+          "impressions": 4,
+          "clicks": 0,
+          "staleness_days": 20,
+          "position": 65.8,
+          "ctr_pct": 0.0,
+          "days_with_impressions": 4,
+          "content_age_days": 304,
+          "trend_direction": "down",
+          "actual": 1,
+          "predicted": 0,
+          "pred_prob": 0.09994318593388392,
+          "score": 3
+        },
+        {
+          "content_id": "content_929f003731a9",
+          "client_id": "client_d4735e3a26",
+          "impressions": 1,
+          "clicks": 0,
+          "staleness_days": 20,
+          "position": 15.0,
+          "ctr_pct": 0.0,
+          "days_with_impressions": 1,
+          "content_age_days": 489,
+          "trend_direction": "down",
+          "actual": 1,
+          "predicted": 0,
+          "pred_prob": 0.102297007745141,
+          "score": 3
+        }
+      ]
+    },
+    "top10_queue_client_holdout": [
+      {
+        "rank": 1,
+        "content_id": "content_3e79eaafc89d",
+        "client_id": "client_f74efabef1",
+        "priority_score": 94.1,
+        "pred_prob": 0.9159253925040739,
+        "score": 5,
+        "action_full": "REVIEW_NOW (Refresh & Snippet/CTR Check)",
+        "reason_code_full": "STALE_HIGH_VOLUME | STRIKING_DISTANCE_DECAY_RISK | LOW_CTR_HIGH_EXPOSURE | HIGH_MODEL_DECLINE_RISK",
+        "confidence_full": "High (strong volume & consistent 90d history)",
+        "what_could_make_it_wrong": "Traffic change could reflect seasonal demand shifts or sibling URL cannibalization rather than content staleness.",
+        "impressions": 8779,
+        "clicks": 0,
+        "staleness_days": 20,
+        "position": 11.6,
+        "ctr_pct": 0.0,
+        "is_declining_label": 0
+      },
+      {
+        "rank": 2,
+        "content_id": "content_8fdbff16a886",
+        "client_id": "client_f74efabef1",
+        "priority_score": 93.4,
+        "pred_prob": 0.9059852868951639,
+        "score": 5,
+        "action_full": "REVIEW_NOW (Refresh & Snippet/CTR Check)",
+        "reason_code_full": "STALE_HIGH_VOLUME | STRIKING_DISTANCE_DECAY_RISK | LOW_CTR_HIGH_EXPOSURE | HIGH_MODEL_DECLINE_RISK",
+        "confidence_full": "Medium-High (sufficient exposure; check query mix)",
+        "what_could_make_it_wrong": "Traffic change could reflect seasonal demand shifts or sibling URL cannibalization rather than content staleness.",
+        "impressions": 3863,
+        "clicks": 0,
+        "staleness_days": 20,
+        "position": 12.0,
+        "ctr_pct": 0.0,
+        "is_declining_label": 0
+      },
+      {
+        "rank": 3,
+        "content_id": "content_477f7892c1f1",
+        "client_id": "client_f74efabef1",
+        "priority_score": 93.0,
+        "pred_prob": 0.8999391938444671,
+        "score": 5,
+        "action_full": "REVIEW_NOW (Refresh & Snippet/CTR Check)",
+        "reason_code_full": "STALE_HIGH_VOLUME | STRIKING_DISTANCE_DECAY_RISK | LOW_CTR_HIGH_EXPOSURE | HIGH_MODEL_DECLINE_RISK",
+        "confidence_full": "High (strong volume & consistent 90d history)",
+        "what_could_make_it_wrong": "Page ranks on Page 1 with near-zero CTR; SERP features/AI overview or snippet mismatch may explain low clicks without content decay.",
+        "impressions": 5147,
+        "clicks": 0,
+        "staleness_days": 20,
+        "position": 8.4,
+        "ctr_pct": 0.0,
+        "is_declining_label": 1
+      },
+      {
+        "rank": 4,
+        "content_id": "content_ef731e95e774",
+        "client_id": "client_f74efabef1",
+        "priority_score": 93.0,
+        "pred_prob": 0.8994910208069354,
+        "score": 5,
+        "action_full": "REVIEW_NOW (Refresh & Snippet/CTR Check)",
+        "reason_code_full": "STALE_HIGH_VOLUME | STRIKING_DISTANCE_DECAY_RISK | LOW_CTR_HIGH_EXPOSURE | HIGH_MODEL_DECLINE_RISK",
+        "confidence_full": "High (strong volume & consistent 90d history)",
+        "what_could_make_it_wrong": "Traffic change could reflect seasonal demand shifts or sibling URL cannibalization rather than content staleness.",
+        "impressions": 5226,
+        "clicks": 0,
+        "staleness_days": 20,
+        "position": 10.7,
+        "ctr_pct": 0.0,
+        "is_declining_label": 1
+      },
+      {
+        "rank": 5,
+        "content_id": "content_03582b12af32",
+        "client_id": "client_f74efabef1",
+        "priority_score": 92.6,
+        "pred_prob": 0.894517360778226,
+        "score": 5,
+        "action_full": "REVIEW_NOW (Refresh & Snippet/CTR Check)",
+        "reason_code_full": "STALE_HIGH_VOLUME | STRIKING_DISTANCE_DECAY_RISK | LOW_CTR_HIGH_EXPOSURE | HIGH_MODEL_DECLINE_RISK",
+        "confidence_full": "High (strong volume & consistent 90d history)",
+        "what_could_make_it_wrong": "Page ranks on Page 1 with near-zero CTR; SERP features/AI overview or snippet mismatch may explain low clicks without content decay.",
+        "impressions": 4918,
+        "clicks": 0,
+        "staleness_days": 20,
+        "position": 10.0,
+        "ctr_pct": 0.0,
+        "is_declining_label": 1
+      },
+      {
+        "rank": 6,
+        "content_id": "content_25ebfb5aa399",
+        "client_id": "client_f74efabef1",
+        "priority_score": 92.1,
+        "pred_prob": 0.8867775986302734,
+        "score": 5,
+        "action_full": "REVIEW_NOW (Refresh & Snippet/CTR Check)",
+        "reason_code_full": "STALE_HIGH_VOLUME | STRIKING_DISTANCE_DECAY_RISK | LOW_CTR_HIGH_EXPOSURE | HIGH_MODEL_DECLINE_RISK",
+        "confidence_full": "High (strong volume & consistent 90d history)",
+        "what_could_make_it_wrong": "Traffic change could reflect seasonal demand shifts or sibling URL cannibalization rather than content staleness.",
+        "impressions": 4984,
+        "clicks": 0,
+        "staleness_days": 20,
+        "position": 14.4,
+        "ctr_pct": 0.0,
+        "is_declining_label": 0
+      },
+      {
+        "rank": 7,
+        "content_id": "content_c2623272bc49",
+        "client_id": "client_f74efabef1",
+        "priority_score": 91.9,
+        "pred_prob": 0.8849468116847855,
+        "score": 5,
+        "action_full": "REVIEW_NOW (Refresh & Snippet/CTR Check)",
+        "reason_code_full": "STALE_HIGH_VOLUME | STRIKING_DISTANCE_DECAY_RISK | LOW_CTR_HIGH_EXPOSURE | HIGH_MODEL_DECLINE_RISK",
+        "confidence_full": "High (strong volume & consistent 90d history)",
+        "what_could_make_it_wrong": "Traffic change could reflect seasonal demand shifts or sibling URL cannibalization rather than content staleness.",
+        "impressions": 4050,
+        "clicks": 0,
+        "staleness_days": 20,
+        "position": 11.3,
+        "ctr_pct": 0.0,
+        "is_declining_label": 1
+      },
+      {
+        "rank": 8,
+        "content_id": "content_1a0b27cdb6a1",
+        "client_id": "client_f74efabef1",
+        "priority_score": 91.9,
+        "pred_prob": 0.8846955274316293,
+        "score": 5,
+        "action_full": "REVIEW_NOW (Refresh & Snippet/CTR Check)",
+        "reason_code_full": "STALE_HIGH_VOLUME | STRIKING_DISTANCE_DECAY_RISK | LOW_CTR_HIGH_EXPOSURE | HIGH_MODEL_DECLINE_RISK",
+        "confidence_full": "High (strong volume & consistent 90d history)",
+        "what_could_make_it_wrong": "Page ranks on Page 1 with near-zero CTR; SERP features/AI overview or snippet mismatch may explain low clicks without content decay.",
+        "impressions": 3969,
+        "clicks": 0,
+        "staleness_days": 20,
+        "position": 9.9,
+        "ctr_pct": 0.0,
+        "is_declining_label": 1
+      },
+      {
+        "rank": 9,
+        "content_id": "content_38b3f0575991",
+        "client_id": "client_f74efabef1",
+        "priority_score": 91.9,
+        "pred_prob": 0.8839803422720772,
+        "score": 5,
+        "action_full": "REVIEW_NOW (Refresh & Snippet/CTR Check)",
+        "reason_code_full": "STALE_HIGH_VOLUME | STRIKING_DISTANCE_DECAY_RISK | LOW_CTR_HIGH_EXPOSURE | HIGH_MODEL_DECLINE_RISK",
+        "confidence_full": "High (strong volume & consistent 90d history)",
+        "what_could_make_it_wrong": "Page ranks on Page 1 with near-zero CTR; SERP features/AI overview or snippet mismatch may explain low clicks without content decay.",
+        "impressions": 3754,
+        "clicks": 0,
+        "staleness_days": 20,
+        "position": 8.9,
+        "ctr_pct": 0.0,
+        "is_declining_label": 1
+      },
+      {
+        "rank": 10,
+        "content_id": "content_ccd35f0d9336",
+        "client_id": "client_f74efabef1",
+        "priority_score": 91.5,
+        "pred_prob": 0.8791763206447806,
+        "score": 5,
+        "action_full": "REVIEW_NOW (Refresh & Snippet/CTR Check)",
+        "reason_code_full": "STALE_HIGH_VOLUME | STRIKING_DISTANCE_DECAY_RISK | LOW_CTR_HIGH_EXPOSURE | HIGH_MODEL_DECLINE_RISK",
+        "confidence_full": "High (strong volume & consistent 90d history)",
+        "what_could_make_it_wrong": "Traffic change could reflect seasonal demand shifts or sibling URL cannibalization rather than content staleness.",
+        "impressions": 3583,
+        "clicks": 0,
+        "staleness_days": 20,
+        "position": 12.1,
+        "ctr_pct": 0.0,
+        "is_declining_label": 1
+      }
+    ]
+  },
+  "signal_audit": {
+    "n_rows": 30000,
+    "n_clients": 32,
+    "declining_count": 16262,
+    "declining_rate": 0.5421,
+    "impressions_quantiles": {
+      "0.1": 5.0,
+      "0.25": 81.0,
+      "0.5": 731.0,
+      "0.75": 3615.25,
+      "0.9": 12136.4,
+      "0.99": 73505.83
+    },
+    "staleness_quantiles": {
+      "0.1": 13.0,
+      "0.25": 20.0,
+      "0.5": 20.0,
+      "0.75": 104.0,
+      "0.9": 104.0
+    },
+    "test1_staleness_vs_decline": {
+      "stale_ge_90d_decline_rate": 0.6085,
+      "fresh_lt_90d_decline_rate": 0.512,
+      "stale_ge_90d_n": 9345,
+      "fresh_lt_90d_n": 20655,
+      "verdict": "CONFIRMED"
+    },
+    "test2_search_volume_vs_impressions": {
+      "pearson_r_raw": 0.0012,
+      "verdict": "FALSE / WEAK (near-zero linear correlation r=0.0012)"
+    },
+    "test3_ctr_by_position_tier": {
+      "deep": 0.0414,
+      "page_1": 0.3503,
+      "page_3_5": 0.1549,
+      "striking": 0.3469,
+      "top_3": 0.4885
+    },
+    "flag_test_stale_visible_page": {
+      "flagged_n": 17,
+      "flagged_decline_rate": 0.9412,
+      "unflagged_decline_rate": 0.5418
+    }
+  }
+}
