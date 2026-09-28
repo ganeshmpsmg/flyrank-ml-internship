@@ -3,8 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prioritizing Content Refresh Reviews Using Pre-Decision Search Signals: A Decision-Support Study</title>
-  <meta name="description" content="FlyRank ML Internship Week-8 Capstone Research Paper: Evaluating Rule-Based Baselines and Interpretable Logistic Regression for Content Refresh Prioritization." />
+  <title>Ganesh MP | Prioritizing Content Refresh Reviews Using Pre-Decision Search Signals &mdash; FlyRank ML Capstone &amp; AI Portfolio</title>
+  <meta name="description" content="Ganesh MP (@ganeshmpsmg) &mdash; AI &amp; Machine Learning Portfolio and FlyRank ML Week-8 Capstone Research Paper: Evaluating Rule-Based Baselines and Interpretable Logistic Regression for Content Refresh Prioritization across 30,000 pages." />
+  <meta name="author" content="Ganesh MP" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ganeshmpsmg.github.io/flyrank-ml-internship/" />
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+
+  <!-- Open Graph / Social Sharing Metadata -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Ganesh MP &mdash; AI &amp; ML Engineering Portfolio" />
+  <meta property="og:title" content="Ganesh MP | Content Refresh Priority Prediction &mdash; FlyRank ML Capstone" />
+  <meta property="og:description" content="Reproducible baseline-vs-Logistic-Regression decision-support study across 30,000 search pages (Accuracy 0.6688, ROC AUC 0.7144, P@50 0.6200 on unseen client holdout)." />
+  <meta property="og:url" content="https://ganeshmpsmg.github.io/flyrank-ml-internship/" />
+  <meta property="og:image" content="https://ganeshmpsmg.github.io/flyrank-ml-internship/og-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Ganesh MP FlyRank ML Capstone Research Paper Summary Card" />
+
+  <!-- Twitter / X Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ganesh MP | Content Refresh Priority Prediction &mdash; FlyRank ML Capstone" />
+  <meta name="twitter:description" content="Reproducible baseline-vs-Logistic-Regression decision-support study on 30,000 search pages by Ganesh MP (@ganeshmpsmg)." />
+  <meta name="twitter:image" content="https://ganeshmpsmg.github.io/flyrank-ml-internship/og-preview.png" />
+
+  <!-- Structured Data (Schema.org TechArticle + Person) for Search Indexing -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Prioritizing Content Refresh Reviews Using Pre-Decision Search Signals: A Reproducible Baseline-vs-Logistic-Regression Decision-Support Study",
+    "description": "FlyRank Machine Learning Internship Week-8 Capstone Research Paper and AI/ML Engineering Portfolio by Ganesh MP.",
+    "author": {
+      "@type": "Person",
+      "name": "Ganesh MP",
+      "url": "https://ganeshmpsmg.github.io/flyrank-ml-internship/",
+      "sameAs": [
+        "https://github.com/ganeshmpsmg",
+        "https://www.linkedin.com/in/ganesh-mp444"
+      ]
+    },
+    "url": "https://ganeshmpsmg.github.io/flyrank-ml-internship/",
+    "image": "https://ganeshmpsmg.github.io/flyrank-ml-internship/og-preview.png",
+    "codeRepository": "https://github.com/ganeshmpsmg/flyrank-ml-internship"
+  }
+  </script>
+
+  <!--
+    WEEK-9 ANALYTICS SLOT (MANUAL ACTIVATION):
+    Uncomment ONE of the snippets below after registering your free account:
+    Option A (GoatCounter):
+    <script data-goatcounter="https://ganeshmpsmg.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    Option B (Cloudflare Web Analytics):
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "YOUR_CLOUDFLARE_TOKEN"}'></script>
+  -->
+
   <style>
     :root {
       --bg: #fcfcfd;
@@ -17,6 +74,10 @@
       --accent: #1d4ed8;
       --accent-soft: #eff6ff;
       --code-bg: #f1f5f9;
+      --danger: #b91c1c;
+      --danger-soft: #fef2f2;
+      --success: #15803d;
+      --success-soft: #f0fdf4;
       --max-w: 940px;
     }
 
@@ -37,6 +98,7 @@
       font-size: 17px;
       line-height: 1.68;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     header.paper-header {
@@ -207,6 +269,8 @@
       padding: 0.15rem 0.35rem;
       border-radius: 3px;
       color: #0f172a;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     pre {
@@ -223,6 +287,8 @@
       background: transparent;
       color: inherit;
       padding: 0;
+      overflow-wrap: normal;
+      word-break: normal;
     }
 
     .callout {
@@ -236,6 +302,7 @@
 
     .table-wrap {
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       margin: 1.2rem 0 1.6rem;
       border: 1px solid var(--border);
       border-radius: 6px;
@@ -298,6 +365,202 @@
       line-height: 1.45;
     }
 
+    /* Portfolio Case Studies & Contact Section Styles */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.1rem;
+      margin: 1.25rem 0 1.75rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.15rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-card.next-slot {
+      border: 2px dashed var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .project-card h3 {
+      margin: 0 0 0.45rem 0;
+      font-size: 1.02rem;
+    }
+
+    .project-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      background: var(--surface-alt);
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .project-card a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .project-card a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--heading);
+      margin-bottom: 0.35rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow-wrap: anywhere;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: 2px solid var(--accent);
+      border-color: var(--accent);
+      background: var(--surface);
+    }
+
+    .form-group input[aria-invalid="true"],
+    .form-group textarea[aria-invalid="true"] {
+      border-color: var(--danger);
+      background: var(--danger-soft);
+    }
+
+    .field-error {
+      display: none;
+      color: var(--danger);
+      font-size: 0.8rem;
+      margin-top: 0.3rem;
+      font-weight: 500;
+    }
+
+    .field-error.visible {
+      display: block;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit {
+      background: var(--accent);
+      color: #ffffff;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .char-counter {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .form-status {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.85rem 1rem;
+      border-radius: 4px;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .form-status.error {
+      display: block;
+      background: var(--danger-soft);
+      border-left: 4px solid var(--danger);
+      color: var(--danger);
+    }
+
+    .form-status.success {
+      display: block;
+      background: var(--success-soft);
+      border-left: 4px solid var(--success);
+      color: var(--success);
+    }
+
+    .badge-slot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.82rem;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.35rem 0.75rem;
+      color: var(--text-muted);
+    }
+
     footer.paper-footer {
       border-top: 1px solid var(--border);
       background: var(--surface);
@@ -323,6 +586,9 @@
       .abstract-box {
         padding: 1.15rem 1.2rem;
       }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -330,7 +596,7 @@
 
   <header class="paper-header">
     <div class="container">
-      <div class="paper-venue">FlyRank Machine Learning Internship &middot; Week-8 Capstone Research Paper</div>
+      <div class="paper-venue">FlyRank Machine Learning Internship &middot; Week-8 Capstone Research Paper &amp; AI/ML Portfolio</div>
       <h1 class="paper-title">Prioritizing Content Refresh Reviews Using Pre-Decision Search Signals: A Reproducible Baseline-vs-Logistic-Regression Decision-Support Study</h1>
       <div class="paper-meta">
         <span><strong>Author:</strong> Ganesh MP (<code>@ganeshmpsmg</code>)</span>
@@ -343,6 +609,9 @@
         <a href="https://github.com/ganeshmpsmg/flyrank-ml-internship/blob/main/work/notebooks/capstone.ipynb">Capstone Notebook</a>
         <a href="https://github.com/ganeshmpsmg/flyrank-ml-internship/blob/main/work/outputs/capstone_metrics.json">Verified JSON Metrics</a>
         <a href="https://huggingface.co/datasets/FlyRank/internship-warehouse">FlyRank Warehouse (Hugging Face)</a>
+        <a href="#portfolio-projects">More ML Projects</a>
+        <a href="#contact">Contact &amp; Feedback</a>
+        <a href="https://www.linkedin.com/in/ganesh-mp444" rel="noopener noreferrer">LinkedIn</a>
       </div>
     </div>
   </header>
@@ -366,7 +635,7 @@
     </section>
 
     <nav class="toc-box" aria-label="Table of Contents">
-      <strong>Paper Contents</strong>
+      <strong>Paper &amp; Portfolio Contents</strong>
       <div class="toc-grid">
         <a href="#abstract">1&ndash;2. Title &amp; Abstract</a>
         <a href="#introduction">3. Introduction &amp; Problem Statement</a>
@@ -385,6 +654,8 @@
         <a href="#takeaways">16. Practical Takeaways</a>
         <a href="#conclusion">17. Conclusion</a>
         <a href="#reproducibility">18. Reproducibility &amp; Data Credit</a>
+        <a href="#portfolio-projects">19. Additional ML Case Studies &amp; Roadmap</a>
+        <a href="#contact">20. Research Feedback &amp; Contact</a>
       </div>
     </nav>
 
@@ -530,7 +801,7 @@
       </ul>
 
       <figure class="paper-figure">
-        <img src="figures/fig1_feature_distributions.svg" alt="Figure 1: Key Pre-Decision Feature Distributions" />
+        <img src="figures/fig1_feature_distributions.svg" alt="Figure 1: Key Pre-Decision Feature Distributions" width="1110" height="710" fetchpriority="high" decoding="async" />
         <figcaption>
           <strong>Figure 1 &mdash; Key Pre-Decision Feature Distributions (<em>N</em> = 30,000).</strong> Raw 90-day impressions exhibit extreme right skew (median = 731.0, 99th percentile = 73,505.8), whereas <code>log1p(impressions_90d)</code> stabilizes the scale for linear modeling alongside <code>staleness_days</code> and <code>avg_position</code>.
         </figcaption>
@@ -741,7 +1012,7 @@
       </div>
 
       <figure class="paper-figure">
-        <img src="figures/fig2_baseline_vs_model_metrics.svg" alt="Figure 2: Baseline vs Logistic Regression Performance Across Validation Regimes" />
+        <img src="figures/fig2_baseline_vs_model_metrics.svg" alt="Figure 2: Baseline vs Logistic Regression Performance Across Validation Regimes" width="1180" height="470" loading="lazy" decoding="async" />
         <figcaption>
           <strong>Figure 2 &mdash; Baseline vs. Logistic Regression Metrics Across Validation Designs.</strong> On the W05 practice test split (<em>n</em> = 20), Logistic Regression lifts accuracy from 0.7000 to 0.8000 and ROC AUC from 0.8542 to 0.9375. On the 30,000-row unseen Client-Grouped Holdout split (<em>n</em> = 2,325), the 7-feature log-scaled Logistic Regression model achieves 0.6688 accuracy, 0.7144 ROC AUC, and 0.6200 Precision@50.
         </figcaption>
@@ -859,7 +1130,7 @@
       </div>
 
       <figure class="paper-figure">
-        <img src="figures/fig3_logistic_regression_coefficients.svg" alt="Figure 3: Standardized Logistic Regression Coefficients" />
+        <img src="figures/fig3_logistic_regression_coefficients.svg" alt="Figure 3: Standardized Logistic Regression Coefficients" width="1167" height="450" loading="lazy" decoding="async" />
         <figcaption>
           <strong>Figure 3 &mdash; Standardized Logistic Regression Coefficients Across Both Models.</strong> Panel (A) shows the Week-5 4-feature model on the practice cohort (<em>N</em> = 100); Panel (B) shows the 7-feature pre-decision model on the FlyRank 30k client-holdout split.
         </figcaption>
@@ -971,7 +1242,7 @@
       </div>
 
       <figure class="paper-figure">
-        <img src="figures/fig4_error_analysis_breakdown.svg" alt="Figure 4: Error Analysis Breakdown and False Positive Signal Profile" />
+        <img src="figures/fig4_error_analysis_breakdown.svg" alt="Figure 4: Error Analysis Breakdown and False Positive Signal Profile" width="1174" height="450" loading="lazy" decoding="async" />
         <figcaption>
           <strong>Figure 4 &mdash; Error Analysis Breakdown &amp; False-Positive Signal Profile.</strong> Confusion matrix counts and individual error diagnostics across the held-out test evaluations.
         </figcaption>
@@ -1039,7 +1310,7 @@
       </div>
 
       <figure class="paper-figure">
-        <img src="figures/fig5_top10_refresh_queue.svg" alt="Figure 5: Top-10 Ranked Content Refresh Queues" />
+        <img src="figures/fig5_top10_refresh_queue.svg" alt="Figure 5: Top-10 Ranked Content Refresh Queues" width="1195" height="470" loading="lazy" decoding="async" />
         <figcaption>
           <strong>Figure 5 &mdash; Top-10 Content Refresh Priority Queues.</strong> Panel (A) shows the Week-4 baseline Top-10 queue on the practice dataset (<em>N</em> = 30); Panel (B) shows the held-out client Top-10 priority queue on the 30,000-row FlyRank dataset (7/10 confirmed declining pages, Precision@10 = 0.7000 vs. 0.3910 base rate).
         </figcaption>
@@ -1083,16 +1354,252 @@ python work/scripts/run_capstone_pipeline.py</code></pre>
       </p>
     </section>
 
+    <section id="portfolio-projects">
+      <h2>19. Additional AI &amp; ML Engineering Projects &amp; Next Case Study Slot</h2>
+      <p>
+        Beyond the FlyRank ML Capstone above, below are additional open-source Machine Learning and Retrieval-Augmented Generation (RAG) projects by <strong>Ganesh MP (<code>@ganeshmpsmg</code>)</strong>, along with the designated slot for the next full research-style case study:
+      </p>
+      <div class="project-grid">
+        <article class="project-card">
+          <div>
+            <span class="project-tag">Retrieval &amp; Ranking</span>
+            <h3>Enterprise Hybrid RAG Search</h3>
+            <p>Hybrid dense + sparse retrieval system combining FAISS vector search, BM25 lexical matching, and Cross-Encoder reranking with an interactive Streamlit evaluation interface.</p>
+          </div>
+          <a href="https://github.com/ganeshmpsmg/enterprise-hybrid-rag" rel="noopener noreferrer">View GitHub Repository &rarr;</a>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <span class="project-tag">Imbalanced Classification</span>
+            <h3>Fraud Detection ML Pipeline</h3>
+            <p>End-to-end financial transaction anomaly and fraud classification workflow featuring precision-recall threshold calibration and false-positive cost analysis.</p>
+          </div>
+          <a href="https://github.com/ganeshmpsmg/Fraud_Detection_ML_Project" rel="noopener noreferrer">View GitHub Repository &rarr;</a>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <span class="project-tag">Customer Analytics</span>
+            <h3>Customer Churn Prediction ML</h3>
+            <p>Supervised churn risk modeling pipeline comparing linear and tree-based classifiers with interpretable feature attribution for retention decision support.</p>
+          </div>
+          <a href="https://github.com/ganeshmpsmg/Customer_Churn_Prediction_ML" rel="noopener noreferrer">View GitHub Repository &rarr;</a>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <span class="project-tag">Recommender Systems</span>
+            <h3>Hybrid Recommendation System ML</h3>
+            <p>Collaborative and content-based filtering architecture for personalized item ranking and cold-start mitigation.</p>
+          </div>
+          <a href="https://github.com/ganeshmpsmg/Hybrid_Recomendation_system_ML" rel="noopener noreferrer">View GitHub Repository &rarr;</a>
+        </article>
+
+        <article id="next-case-study-slot" class="project-card next-slot">
+          <div>
+            <span class="project-tag">Next Case Study Slot (Planned)</span>
+            <h3>Case Study #2: BM25 vs. FAISS vs. Cross-Encoder Reranking Audit</h3>
+            <p><strong>Planned Expansion:</strong> Benchmarking lexical baseline (BM25) vs. hybrid dense retrieval + Cross-Encoder reranking on <code>enterprise-hybrid-rag</code> using Recall@K, MRR@10, and latency trade-offs.</p>
+          </div>
+          <a href="https://github.com/ganeshmpsmg/enterprise-hybrid-rag" rel="noopener noreferrer">Inspect Source Repo &rarr;</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>20. Research Feedback &amp; Contact</h2>
+      <p>
+        Have questions about the Content Refresh Priority data contract, validation design, or ML engineering opportunities? Reach out via <a href="https://www.linkedin.com/in/ganesh-mp444" rel="noopener noreferrer">LinkedIn (@ganesh-mp444)</a>, <a href="https://github.com/ganeshmpsmg" rel="noopener noreferrer">GitHub (@ganeshmpsmg)</a>, or use the validated research feedback form below.
+      </p>
+      <div class="contact-box">
+        <form id="contact-form" novalidate data-submit-count="0" data-blocked-clicks="0">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="contact-name">Your Name <span aria-hidden="true">*</span></label>
+              <input type="text" id="contact-name" name="name" required minlength="2" maxlength="120" placeholder="e.g., Alex Rivera" autocomplete="name" />
+              <div id="error-name" class="field-error" role="alert">Please enter a valid name (at least 2 characters, not purely numbers/punctuation).</div>
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Email Address <span aria-hidden="true">*</span></label>
+              <input type="email" id="contact-email" name="email" required maxlength="160" placeholder="e.g., alex@company.com" autocomplete="email" />
+              <div id="error-email" class="field-error" role="alert">Please enter a valid email address (e.g., name@domain.com).</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-topic">Inquiry Topic</label>
+            <select id="contact-topic" name="topic">
+              <option value="Capstone Research Review">FlyRank ML Capstone Review / Feedback</option>
+              <option value="ML Engineering Opportunity">AI / ML Engineering Role or Collaboration</option>
+              <option value="Reproducibility Question">Data Contract &amp; Reproducibility Question</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-message">Message <span aria-hidden="true">*</span></label>
+            <textarea id="contact-message" name="message" rows="4" required minlength="10" maxlength="4000" placeholder="Share your feedback, question, or collaboration details (minimum 10 characters)..."></textarea>
+            <div id="error-message" class="field-error" role="alert">Please enter a meaningful message between 10 and 4,000 characters.</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="contact-submit-btn" class="btn-submit">Prepare &amp; Send Feedback</button>
+            <span id="char-counter" class="char-counter">0 / 4000 characters</span>
+          </div>
+
+          <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
   </main>
 
   <footer class="paper-footer">
-    <div class="container">
-      <p>
-        <strong>FlyRank ML Internship &mdash; Week-8 Capstone Research Paper</strong> &middot; Author: Ganesh MP (<code>@ganeshmpsmg</code>) &middot;
-        Repository: <a href="https://github.com/ganeshmpsmg/flyrank-ml-internship">github.com/ganeshmpsmg/flyrank-ml-internship</a>
-      </p>
+    <div class="container" style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem;">
+      <div>
+        <p style="margin:0 0 0.35rem 0;">
+          <strong>FlyRank ML Internship &mdash; Week-8 Capstone Research Paper &amp; Portfolio</strong> &middot; Author: Ganesh MP (<code>@ganeshmpsmg</code>)
+        </p>
+        <p style="margin:0;">
+          Repository: <a href="https://github.com/ganeshmpsmg/flyrank-ml-internship">github.com/ganeshmpsmg/flyrank-ml-internship</a> &middot;
+          LinkedIn: <a href="https://www.linkedin.com/in/ganesh-mp444" rel="noopener noreferrer">linkedin.com/in/ganesh-mp444</a>
+        </p>
+      </div>
+      <!--
+        WEEK-9 GRADUATE BADGE SLOT:
+        Once your FlyRank Graduate Badge verification URL is issued in the FlyRank portal,
+        replace the placeholder span below with an <a href="YOUR_VERIFICATION_URL"> link.
+      -->
+      <div id="graduate-badge-slot" class="badge-slot" title="Graduate Badge verification link will be activated upon Week-10 issuance">
+        <span>&#127891; FlyRank AI &amp; ML Track &mdash; Graduate Badge Slot (Pending Final Issuance)</span>
+      </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var form = document.getElementById("contact-form");
+      if (!form) return;
+
+      var nameInput = document.getElementById("contact-name");
+      var emailInput = document.getElementById("contact-email");
+      var topicInput = document.getElementById("contact-topic");
+      var messageInput = document.getElementById("contact-message");
+      var submitBtn = document.getElementById("contact-submit-btn");
+      var statusBox = document.getElementById("form-status");
+      var charCounter = document.getElementById("char-counter");
+
+      var errName = document.getElementById("error-name");
+      var errEmail = document.getElementById("error-email");
+      var errMessage = document.getElementById("error-message");
+
+      var isLocked = false;
+      var submitCount = 0;
+      var blockedClicks = 0;
+
+      if (messageInput && charCounter) {
+        messageInput.addEventListener("input", function () {
+          var len = messageInput.value.length;
+          charCounter.textContent = len + " / 4000 characters";
+        });
+      }
+
+      function setFieldInvalid(inputEl, errEl, isInvalid) {
+        if (!inputEl || !errEl) return;
+        if (isInvalid) {
+          inputEl.setAttribute("aria-invalid", "true");
+          errEl.classList.add("visible");
+        } else {
+          inputEl.setAttribute("aria-invalid", "false");
+          errEl.classList.remove("visible");
+        }
+      }
+
+      function isValidName(val) {
+        var trimmed = (val || "").trim();
+        if (trimmed.length < 2 || trimmed.length > 120) return false;
+        return /[A-Za-z]/.test(trimmed);
+      }
+
+      function isValidEmail(val) {
+        var trimmed = (val || "").trim();
+        if (trimmed.length < 5 || trimmed.length > 160) return false;
+        return /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(trimmed);
+      }
+
+      function isValidMessage(val) {
+        var trimmed = (val || "").trim();
+        if (trimmed.length < 10 || trimmed.length > 4000) return false;
+        return /[A-Za-z0-9]/.test(trimmed);
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        if (isLocked) {
+          blockedClicks += 1;
+          form.setAttribute("data-blocked-clicks", String(blockedClicks));
+          return;
+        }
+
+        var nameVal = nameInput ? nameInput.value : "";
+        var emailVal = emailInput ? emailInput.value : "";
+        var msgVal = messageInput ? messageInput.value : "";
+        var topicVal = topicInput ? topicInput.value : "Capstone Research Review";
+
+        var nameOk = isValidName(nameVal);
+        var emailOk = isValidEmail(emailVal);
+        var msgOk = isValidMessage(msgVal);
+
+        setFieldInvalid(nameInput, errName, !nameOk);
+        setFieldInvalid(emailInput, errEmail, !emailOk);
+        setFieldInvalid(messageInput, errMessage, !msgOk);
+
+        if (!nameOk || !emailOk || !msgOk) {
+          var missing = [];
+          if (!nameOk) missing.push("valid Name");
+          if (!emailOk) missing.push("valid Email Address");
+          if (!msgOk) missing.push("Message (min 10 characters)");
+          statusBox.className = "form-status error";
+          statusBox.textContent = "Validation Error: Please provide a " + missing.join(", ") + " before submitting.";
+          return;
+        }
+
+        // Lock submission immediately to prevent rapid double/5x clicking
+        isLocked = true;
+        submitCount += 1;
+        form.setAttribute("data-submit-count", String(submitCount));
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Submitted (Cooldown Active...)";
+        }
+
+        var issueTitle = encodeURIComponent("[" + topicVal + "] Feedback from " + nameVal.trim());
+        var issueBody = encodeURIComponent(
+          "Name: " + nameVal.trim() + "\n" +
+          "Contact Email: " + emailVal.trim() + "\n" +
+          "Topic: " + topicVal + "\n\n" +
+          "Message:\n" + msgVal.trim()
+        );
+        var ghIssueUrl = "https://github.com/ganeshmpsmg/flyrank-ml-internship/issues/new?title=" + issueTitle + "&body=" + issueBody;
+
+        statusBox.className = "form-status success";
+        statusBox.innerHTML =
+          "<strong>Feedback Validated &amp; Ready (Submission #" + submitCount + "):</strong> " +
+          "Duplicate rapid clicks are locked for 5 seconds. Because GitHub Pages is a static site without a backend mail server, you can dispatch this pre-filled message directly via " +
+          "<a href=\"" + ghIssueUrl + "\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub Issue</a> or connect via " +
+          "<a href=\"https://www.linkedin.com/in/ganesh-mp444\" target=\"_blank\" rel=\"noopener noreferrer\">LinkedIn (@ganesh-mp444)</a>.";
+
+        setTimeout(function () {
+          isLocked = false;
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Prepare & Send Feedback";
+          }
+        }, 5000);
+      });
+    })();
+  </script>
 
 </body>
 </html>
